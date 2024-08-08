@@ -56,5 +56,6 @@ const styles = StyleSheet.create({
   title: {
     color: Colors.white,
     fontSize: Fonts.f16,
+    fontFamily: Fonts.semibold,
   },
 });

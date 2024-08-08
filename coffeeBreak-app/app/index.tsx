@@ -7,7 +7,8 @@ import {
   Text,
   View,
 } from 'react-native';
-export default function App() {
+
+export default function StartScreen() {
   // const width = Dimensions.get('window').width;
 
   const animatedValue = new Animated.ValueXY({ x: 0, y: -70 });
@@ -16,6 +17,7 @@ export default function App() {
     duration: 3500,
     useNativeDriver: true,
   }).start();
+
   return (
     <>
       <ImageBackground
@@ -52,7 +54,6 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     gap: 24,
     padding: 30,
-    backgroundColor: Colors.black,
   },
   contant: {
     gap: 8,
@@ -61,10 +62,12 @@ const styles = StyleSheet.create({
     fontSize: Fonts.f34,
     textAlign: 'center',
     color: Colors.white,
+    fontFamily: Fonts.semibold,
   },
   text: {
     fontSize: Fonts.f14,
     textAlign: 'center',
     color: Colors.textGray,
+    fontFamily: Fonts.regular,
   },
 });
