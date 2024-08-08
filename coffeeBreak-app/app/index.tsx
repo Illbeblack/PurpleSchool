@@ -2,14 +2,13 @@ import CustomButton from '@/shared/CustomButton/CustomButton';
 import { Colors, Fonts } from '@/shared/tokens';
 import {
   Animated,
-  Dimensions,
   ImageBackground,
   StyleSheet,
   Text,
   View,
 } from 'react-native';
 export default function App() {
-  const width = Dimensions.get('window').width;
+  // const width = Dimensions.get('window').width;
 
   const animatedValue = new Animated.ValueXY({ x: 0, y: -70 });
   Animated.timing(animatedValue, {

@@ -12,7 +12,6 @@ export default function CustomButton({
   title,
   ...props
 }: PressableProps & { title: string }) {
-
   const animatedValue = new Animated.Value(0);
 
   const color = animatedValue.interpolate({
@@ -37,7 +36,7 @@ export default function CustomButton({
     }).start();
     props.onPressOut && props.onPressOut(e);
   };
-  
+
   return (
     <Pressable {...props} onPressIn={faidIn} onPressOut={faidOut}>
       <Animated.View style={{ ...styles.button, backgroundColor: color }}>
@@ -59,4 +58,3 @@ const styles = StyleSheet.create({
     fontSize: Fonts.f16,
   },
 });
-
