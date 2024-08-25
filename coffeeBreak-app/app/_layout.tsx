@@ -5,7 +5,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useFonts } from 'expo-font';
 import { useEffect } from 'react';
 
-import LoadingSpinner from '@/shared/LadingSpinner/LoadingSpinner';
+import LoadingSpinner from '@/shared/LoadingSpinner/LoadingSpinner';
 
 SplashScreen.preventAutoHideAsync();
 
