@@ -1,9 +1,10 @@
 import {
+  Animated,
+  GestureResponderEvent,
   Pressable,
   PressableProps,
   StyleSheet,
   Text,
-  View,
 } from 'react-native';
 import { Colors, Fonts, Radius } from '../tokens';
 
@@ -11,11 +12,36 @@ export default function CustomButton({
   title,
   ...props
 }: PressableProps & { title: string }) {
+  const animatedValue = new Animated.Value(0);
+
+  const color = animatedValue.interpolate({
+    inputRange: [0, 100],
+    outputRange: [Colors.primary, Colors.primaryHover],
+  });
+
+  const faidIn = (e: GestureResponderEvent) => {
+    Animated.timing(animatedValue, {
+      toValue: 100,
+      duration: 50,
+      useNativeDriver: true,
+    }).start();
+    props.onPressIn?.(e);
+  };
+
+  const faidOut = (e: GestureResponderEvent) => {
+    Animated.timing(animatedValue, {
+      toValue: 0,
+      duration: 50,
+      useNativeDriver: true,
+    }).start();
+    props.onPressOut?.(e);
+  };
+
   return (
-    <Pressable {...props}>
-      <View style={styles.button}>
+    <Pressable {...props} onPressIn={faidIn} onPressOut={faidOut}>
+      <Animated.View style={{ ...styles.button, backgroundColor: color }}>
         <Text style={styles.title}>{title}</Text>
-      </View>
+      </Animated.View>
     </Pressable>
   );
 }
@@ -25,11 +51,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 21,
-    backgroundColor: Colors.primary,
     borderRadius: Radius.r16,
   },
   title: {
     color: Colors.white,
     fontSize: Fonts.f16,
+    fontFamily: Fonts.semibold,
   },
 });
