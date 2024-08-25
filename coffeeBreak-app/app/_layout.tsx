@@ -5,6 +5,8 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useFonts } from 'expo-font';
 import { useEffect } from 'react';
 
+import LoadingSpinner from '@/shared/LadingSpinner/LoadingSpinner';
+
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
@@ -27,7 +29,7 @@ export default function RootLayout() {
   }, [error]);
 
   if (!loaded) {
-    return null;
+    return <LoadingSpinner />;
   }
 
   return (

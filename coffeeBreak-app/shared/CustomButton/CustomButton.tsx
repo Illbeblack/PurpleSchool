@@ -25,7 +25,7 @@ export default function CustomButton({
       duration: 50,
       useNativeDriver: true,
     }).start();
-    props.onPressIn && props.onPressIn(e);
+    props.onPressIn?.(e);
   };
 
   const faidOut = (e: GestureResponderEvent) => {
@@ -34,7 +34,7 @@ export default function CustomButton({
       duration: 50,
       useNativeDriver: true,
     }).start();
-    props.onPressOut && props.onPressOut(e);
+    props.onPressOut?.(e);
   };
 
   return (
