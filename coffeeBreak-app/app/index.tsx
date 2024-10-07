@@ -1,5 +1,6 @@
 import CustomButton from '@/shared/CustomButton/CustomButton';
 import { Colors, Fonts } from '@/shared/tokens';
+import { router } from 'expo-router';
 import {
   Animated,
   ImageBackground,
@@ -38,7 +39,10 @@ export default function StartScreen() {
             Свежие зёрна, настоящая арабика и бережная обжарка
           </Text>
         </Animated.View>
-        <CustomButton title="Начать" />
+        <CustomButton
+          onPress={() => router.replace('/(tabs)')}
+          title="Начать"
+        />
       </View>
     </>
   );
