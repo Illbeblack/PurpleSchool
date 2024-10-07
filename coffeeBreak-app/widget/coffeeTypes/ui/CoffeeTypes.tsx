@@ -1,27 +1,26 @@
 import { API } from '@/entities/product/api/api';
-import { loadProducrtAtom } from '@/entities/product/model/producrt.state';
+import { loadProductAtom } from '@/entities/product/model/product.state';
 import TypeChip from '@/shared/TypeChip/TypeChip';
+import { Types } from '@/shared/types';
+
 import { useSetAtom } from 'jotai';
+import { useCallback } from 'react';
 import { StyleSheet, View } from 'react-native';
 
 export default function CoffeeTypes() {
-  const types = [
-    { id: 0, name: 'Все', type: '' },
-    { id: 1, name: 'Капучино', type: 'cappuccino' },
-    { id: 2, name: 'Латте', type: 'latte' },
-    { id: 3, name: 'Макиатто', type: 'macchiato' },
-    { id: 4, name: 'Американо', type: 'americano' },
-  ];
+  const loadProduct = useSetAtom(loadProductAtom);
 
-  const loadProduct = useSetAtom(loadProducrtAtom);
+  const loadProductHandler = useCallback((type: string) => {
+    loadProduct(`${API.products}?type=${type}`);
+  }, []);
 
   return (
     <View style={styles.container}>
-      {types.map((t) => (
+      {Types.map((t) => (
         <TypeChip
           key={t.id}
           lable={t.name}
-          onPress={() => loadProduct(`${API.products}?type=${t.type}`)}
+          onPress={() => loadProductHandler(t.type)}
         />
       ))}
     </View>

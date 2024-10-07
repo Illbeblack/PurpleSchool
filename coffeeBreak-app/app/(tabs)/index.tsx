@@ -1,9 +1,10 @@
 import { API } from '@/entities/product/api/api';
-import {
-  loadProducrtAtom,
-  productAtom,
-} from '@/entities/product/model/producrt.state';
+
 import { Product } from '@/entities/product/model/product.model';
+import {
+  loadProductAtom,
+  productAtom,
+} from '@/entities/product/model/product.state';
 import CoffeeCard from '@/shared/CoffeeCard/CoffeeCard';
 import SearchInput from '@/shared/SearchInput/SearchInput';
 import { Colors } from '@/shared/tokens';
@@ -17,13 +18,23 @@ import { ActivityIndicator, FlatList, StyleSheet, View } from 'react-native';
 
 export default function Catalog() {
   const [search, onSearch] = useState('');
-  const { isLoading,  products } = useAtomValue(productAtom);
-  const loadProduct = useSetAtom(loadProducrtAtom);
-  console.log(isLoading);
+  const { isLoading, products } = useAtomValue(productAtom);
+  const loadProduct = useSetAtom(loadProductAtom);
+  let items = [];
 
   useEffect(() => {
-    loadProduct(`${API.products}`);
-  }, [loadProduct]);
+    if (!search) {
+      loadProduct(`${API.products}`);
+    }
+  }, []);
+
+  const filterItems = (arr, query) => {
+    return arr.filter(
+      (el) => el.description.toLowerCase().indexOf(query.toLowerCase()) !== -1
+    );
+  };
+
+  !search ? (items = products) : (items = filterItems(products, search));
 
   const renderProduct = ({ item }: { item: Product }) => {
     return (
@@ -45,8 +56,8 @@ export default function Catalog() {
       <View style={styles.main}>
         <CoffeeTypes />
         {isLoading && <ActivityIndicator size="large" color={Colors.primary} />}
-        {products.length > 0 && (
-          <FlatList data={products} renderItem={renderProduct} />
+        {items.length > 0 && (
+          <FlatList data={items} renderItem={renderProduct} />
         )}
       </View>
     </View>

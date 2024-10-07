@@ -1,7 +1,6 @@
 import { atom } from 'jotai';
 import { Product } from './product.model';
 import axios, { AxiosError } from 'axios';
-import { API } from '../api/api';
 
 export const productAtom = atom<ProductState>({
   products: [],
@@ -9,7 +8,7 @@ export const productAtom = atom<ProductState>({
   error: null,
 });
 
-export const loadProducrtAtom = atom(
+export const loadProductAtom = atom(
   async (get) => {
     return get(productAtom);
   },

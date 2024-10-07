@@ -1,5 +1,7 @@
 import HomeIcon from '@/assets/icons/home-icon';
 import OrderIcon from '@/assets/icons/order-icon';
+import Divider from '@/shared/Divider/Divider';
+
 import { Colors, Radius } from '@/shared/tokens';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
@@ -8,12 +10,7 @@ export default function TabBar({ state, descriptors, navigation }) {
     <View style={styles.tabbar}>
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
-        const label =
-          options.tabBarLabel !== undefined
-            ? options.tabBarLabel
-            : options.title !== undefined
-              ? options.title
-              : route.name;
+        const label = options.tabBarLabel ?? options.title ?? route.name;
 
         const isFocused = state.index === index;
 
@@ -55,7 +52,7 @@ export default function TabBar({ state, descriptors, navigation }) {
               )}
               <Text>{label}</Text>
             </TouchableOpacity>
-            {index === 0 && <Text style={styles.separator}>|</Text>}
+            {index === 0 && <Divider />}
           </>
         );
       })}
